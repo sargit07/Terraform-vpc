@@ -1,6 +1,6 @@
 provider "aws" {
-    access_key = "xxxxx"
-    secret_key = "xxxxx"
+    access_key = "AKIAT6JIZW5LGRLIGSCK"
+    secret_key = "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"
     region = "us-east-1"
 }
 
@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
     cidr_block = "10.0.0.0/18"
     
     tags = {
-      "Name" = "Main_VPC"
+      "Name" = "Main_VPC1"
     }
 }
 
@@ -17,7 +17,7 @@ resource "aws_subnet" "public" {
   cidr_block = "10.0.0.0/24"
 
   tags = {
-    Name = "public subnet"
+    Name = "public subnet1"
   }
 }
 
@@ -26,7 +26,7 @@ resource "aws_subnet" "private" {
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "private subnet"
+    Name = "private subnet1"
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "Main_IGW"
+    Name = "Main_IGW1"
   }
 }
 
@@ -42,7 +42,7 @@ resource "aws_eip" "nat_eip" {
     vpc = true
     depends_on = [aws_internet_gateway.gw]
     tags = {
-        Name = "NAT Gateway EIP"
+        Name = "NAT Gateway EIP1"
     }
 }
 
@@ -51,7 +51,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.public.id
 
   tags = {
-    Name = "Main Nat Gateway"
+    Name = "Main Nat Gateway1"
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_route_table" "public" {
        gateway_id = aws_internet_gateway.gw.id
     } 
     tags = {
-       Name = "Public Route Table"
+       Name = "Public Route Table1"
     }
 }
 resource "aws_route_table_association" "public" {
@@ -77,7 +77,7 @@ resource "aws_route_table" "private" {
        gateway_id = aws_internet_gateway.gw.id
     } 
     tags = {
-       Name = "Private Route Table"
+       Name = "Private Route Table1"
     }
 }
 resource "aws_route_table_association" "private" {
